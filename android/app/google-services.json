@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "655503651025",
+    "firebase_url": "https://testsahajlc.firebaseio.com",
+    "project_id": "testsahajlc",
+    "storage_bucket": "testsahajlc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655503651025:android:c7be87c32ee80a3f8615f0",
+        "android_client_info": {
+          "package_name": "com.example.Sahaj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655503651025-57qr09k7ltuo35p619haf9k2qghh1gtk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Sahaj",
+            "certificate_hash": "bcb0070a7e491808a758668245cb3c5162e27d17"
+          }
+        },
+        {
+          "client_id": "655503651025-i7eq2k32d9c3mr0vrk1d78laqsqbh1ek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Sahaj",
+            "certificate_hash": "217a62b64ae286dbfcabcf8df30ffca80fabbf9a"
+          }
+        },
+        {
+          "client_id": "655503651025-tfrf1st82q4flet9f81dadv2op0uohik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANb37YDgNbk_ozeoJefjCyKRRuDfGfjsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655503651025-tfrf1st82q4flet9f81dadv2op0uohik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655503651025:android:ccfa8b6b16f8fb878615f0",
+        "android_client_info": {
+          "package_name": "com.medicpulse.medic_pulse_doc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655503651025-tfrf1st82q4flet9f81dadv2op0uohik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANb37YDgNbk_ozeoJefjCyKRRuDfGfjsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655503651025-tfrf1st82q4flet9f81dadv2op0uohik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655503651025:android:f0be17a92884a2838615f0",
+        "android_client_info": {
+          "package_name": "com.sahajlilecare.sahaj_lile_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655503651025-82fu8voeibf8lght12tf6m48l663mtpe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sahajlilecare.sahaj_lile_care",
+            "certificate_hash": "217a62b64ae286dbfcabcf8df30ffca80fabbf9a"
+          }
+        },
+        {
+          "client_id": "655503651025-tfrf1st82q4flet9f81dadv2op0uohik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANb37YDgNbk_ozeoJefjCyKRRuDfGfjsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655503651025-tfrf1st82q4flet9f81dadv2op0uohik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
