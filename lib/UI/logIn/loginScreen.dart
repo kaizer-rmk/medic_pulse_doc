@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
 import 'package:medic_pulse_doc/Helper/String.dart';
 import 'package:medic_pulse_doc/Helper/roundedButton.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:medic_pulse_doc/UI/dashBoard/dashBoard.dart';
+import 'package:medic_pulse_doc/services/authServices.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  User user;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +74,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 RoundedButton(
                   onPressed: () {
-                    //Do Something
+                    AuthService().signInWithGoogle().then((user) => {
+                      this.user = user,
+                      print(user),
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()))
+                    });
                   },
                   colour: Colors.deepOrange,
                   title: googleSignin,
