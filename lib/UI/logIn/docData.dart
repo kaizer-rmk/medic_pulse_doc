@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
-import 'package:medic_pulse_doc/Helper/appBar1.dart';
+import 'package:medic_pulse_doc/Helper/appBar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medic_pulse_doc/UI/dashBoard/dashBoard.dart';
 
@@ -78,15 +78,19 @@ class _DocDataState extends State<DocData> {
       print(e);
     }
   }
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(130),
+        child: AppBarDB(_scaffoldKey),
+      ),
       backgroundColor: appBG,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            AppBar1(),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Center(
