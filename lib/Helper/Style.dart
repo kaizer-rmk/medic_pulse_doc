@@ -25,6 +25,7 @@ final LinearGradient splashBGGradient = LinearGradient(
     colors: [Color(0xFF2A2AC0), Color(0xFF181461)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter);
+
 //
 //  Splash Screen Text style
 //

@@ -9,12 +9,7 @@ class AuthService{
 
   bool isSignedIn = false;
 
-
-  AuthService(){
-
-  }
-
-  Future<User> signInWithGoogle() async{
+  Future<dynamic> signInWithGoogle() async{
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
 
@@ -34,7 +29,15 @@ class AuthService{
 
     print('signInWithGoogle succeeded: $user');
     isSignedIn = true;
+
     return user;
+    // if(_alreadyExists){
+    //   return  HomePage(),
+    // }
+    // else{
+    // return DocData(),
+    // }
+
   }
 
   void updateUserData(User user) async{

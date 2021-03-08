@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
@@ -6,8 +7,11 @@ import 'package:medic_pulse_doc/Helper/roundedButton.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medic_pulse_doc/UI/dashBoard/dashBoard.dart';
+import 'package:medic_pulse_doc/UI/logIn/docData.dart';
 import 'package:medic_pulse_doc/services/authServices.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final FirebaseFirestore db = FirebaseFirestore.instance;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
+  
   User user;
 
   @override
@@ -34,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     image: AssetImage('images/logoIn.png'),
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 50),
                 Text(
                   appName,
                   style: splashHeadTextStyle,
@@ -76,28 +81,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     AuthService().signInWithGoogle().then((user) => {
                       this.user = user,
-                      print(user),
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()))
+                      db.collection('docInfo').doc(user.uid).get().then((data)=>{
+                        data.exists? Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage())): Navigator.push(context,MaterialPageRoute(builder: (context)=>DocData())),
+                      }),
                     });
                   },
                   colour: Colors.deepOrange,
                   title: googleSignin,
                   logo: Icons.email,
                 ),
-                RoundedButton(
-                  onPressed: () {
-                    //Do Something
-                  },
-                  colour: Colors.lightBlueAccent,
-                  title: phoneSignIn,
-                  logo: Icons.phone,
-                ),
-                SizedBox(height: 20),
                 Text(
                   devInfo,
                   style: infoDevTextStyle,
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
               ],
             ),
           ),
