@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
 import 'package:medic_pulse_doc/UI/logIn/loginScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medic_pulse_doc/services/authServices.dart';
 
 AppDrawer(BuildContext context, dpUrl, email, name) {

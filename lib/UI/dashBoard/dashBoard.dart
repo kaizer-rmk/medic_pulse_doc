@@ -4,6 +4,7 @@ import 'package:medic_pulse_doc/Helper/appDrawer.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   String dpUrl;
   String mail;
   String name;
+  int selectedIndex;
 
   @override
   void initState() {
@@ -56,6 +58,35 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: <Widget>[
 
+        ],
+      ),
+      bottomNavigationBar: FFNavigationBar(
+        theme: FFNavigationBarTheme(
+          barBackgroundColor: headDark,
+          selectedItemBorderColor: docGreen,
+          selectedItemBackgroundColor: Colors.white,
+          selectedItemIconColor: docGreen,
+          selectedItemLabelColor: docGreen,
+        ),
+        selectedIndex: selectedIndex,
+        onSelectTab: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        items: [
+          FFNavigationBarItem(
+            iconData: Icons.home_outlined,
+            label: 'Home',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.chat_bubble,
+            label: 'Chat',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.calendar_today_rounded,
+            label: 'Appointments',
+          ),
         ],
       ),
     );
