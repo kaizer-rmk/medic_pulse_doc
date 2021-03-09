@@ -20,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _auth = FirebaseAuth.instance;
   String dpUrl;
+  String mail;
+  String name;
 
   @override
   void initState() {
@@ -32,8 +34,9 @@ class _HomePageState extends State<HomePage> {
       final user =  _auth.currentUser;
       if(user!=null){
         loggedInUser = user;
-        print(loggedInUser);
         dpUrl = loggedInUser.photoURL;
+        mail = loggedInUser.email;
+        name = loggedInUser.displayName;
       }
     }
     catch(e){
@@ -48,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         preferredSize: Size.fromHeight(130),
         child: AppBarDB(_scaffoldKey),
       ),
-      endDrawer: AppDrawer(context,dpUrl),
+      endDrawer: AppDrawer(context,dpUrl,mail,name),
       backgroundColor: appBG,
       body: Column(
         children: <Widget>[
