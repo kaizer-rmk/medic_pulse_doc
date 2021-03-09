@@ -273,7 +273,7 @@ class _DocDataState extends State<DocData> {
                                   'regID':regID,
                                   'sex':sex,
                                 });
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard()));
                               }
                             },
                           ),

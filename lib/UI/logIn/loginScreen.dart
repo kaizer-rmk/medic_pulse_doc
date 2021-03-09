@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       AuthService().signInWithGoogle().then((user) => {
                         this.user = user,
                         db.collection('docInfo').doc(user.uid).get().then((data)=>{
-                          data.exists? Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage())): Navigator.push(context,MaterialPageRoute(builder: (context)=>DocData())),
+                          data.exists? Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard())): Navigator.push(context,MaterialPageRoute(builder: (context)=>DocData())),
                         }),
                       });
                       setState(() {
