@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/UI/screens/homeScreen.dart';
 import 'package:medic_pulse_doc/UI/screens/chatScreen.dart';
 import 'package:medic_pulse_doc/UI/screens/appointmentScreen.dart';
+import 'package:medic_pulse_doc/UI/screens/profileScreen.dart';
 import 'tabData.dart';
 
-class TabNavigatorRoutes{
+class TabNavigatorRoutes {
   static const String root = '/';
 }
 
 class NavigatorRoutes extends StatelessWidget {
-
   NavigatorRoutes({this.navigatorKey, this.tabItem});
 
   final GlobalKey<NavigatorState> navigatorKey;
@@ -20,22 +20,27 @@ class NavigatorRoutes extends StatelessWidget {
     return Navigator(
       key: navigatorKey,
       initialRoute: TabNavigatorRoutes.root,
-      onGenerateRoute: (routeSettings){
-        switch(tabItem.index){
+      onGenerateRoute: (routeSettings) {
+        switch (tabItem.index) {
           case 0:
             {
-              return MaterialPageRoute(builder: (context)=>HomeScreen());
+              return MaterialPageRoute(builder: (context) => HomeScreen());
             }
           case 1:
             {
-              return MaterialPageRoute(builder: (context)=>ChatScreen());
+              return MaterialPageRoute(builder: (context) => ChatScreen());
             }
           case 2:
             {
-              return MaterialPageRoute(builder: (context)=>AppointmentScreen());
+              return MaterialPageRoute(
+                  builder: (context) => AppointmentScreen());
+            }
+          case 3:
+            {
+              return MaterialPageRoute(builder: (context) => Profile());
             }
         }
-        return MaterialPageRoute(builder: (context)=>AppointmentScreen());
+        return MaterialPageRoute(builder: (context) => AppointmentScreen());
       },
     );
   }

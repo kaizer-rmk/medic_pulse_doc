@@ -13,8 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  final delay = 4;
+  final delay = 3;
 
   @override
   void initState() {
@@ -23,26 +22,19 @@ class _SplashScreenState extends State<SplashScreen> {
     _nav();
   }
 
-  _nav() async{
+  _nav() async {
     var _duration = Duration(seconds: delay);
-    return(
-    Timer(_duration,()=>{navigationPage()})
-    );
+    return (Timer(_duration, () => {navigationPage()}));
   }
 
-  void navigationPage() async{
-    final bool  check = AuthService().isSignedIn;
-    if(check){
+  void navigationPage() async {
+    final bool check = AuthService().isSignedIn;
+    if (check) {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => DashBoard()));
-    }
-    else{
+          context, MaterialPageRoute(builder: (context) => DashBoard()));
+    } else {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => LoginScreen()));
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
     }
   }
 
@@ -56,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Container(
                   alignment: Alignment.center,
                   child: Column(
@@ -65,17 +57,20 @@ class _SplashScreenState extends State<SplashScreen> {
                     children: <Widget>[
                       Container(
                         child: Center(
-                          child: Image(image: AssetImage('images/logoIn.png'),height: 200, width: 200,)
-                        ),
+                            child: Image(
+                          image: AssetImage('images/logoIn.png'),
+                          height: MediaQuery.of(context).size.height * 0.30,
+                          width: MediaQuery.of(context).size.width * 0.70,
+                        )),
                       ),
                       Text(appName, style: splashHeadTextStyle),
                       Text(appTag, style: splashSubHeadTextStyle),
-                      Padding(padding: const EdgeInsets.only(top: 10.0)),
                     ],
                   ),
                 ),
               ),
               Expanded(
+                flex: 1,
                 child: Column(
                   children: <Widget>[
                     CircularProgressIndicator(

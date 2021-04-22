@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,23 +18,28 @@ class DocData extends StatefulWidget {
 }
 
 class _DocDataState extends State<DocData> {
-
   final _auth = FirebaseAuth.instance;
 
   TextEditingController _controller;
 
   final _formKey = GlobalKey<FormState>();
-  List gender=["Male","Female","Other"];
+
+//https://firebasestorage.googleapis.com/v0/b/testsahajlc.appspot.com/o/DocImages%2Fdoc1.png?alt=media&token=downloadTokens
+
+  List gender = ["Male", "Female", "Other"];
+  List<int> male = [2, 3];
+  List<int> female = [1, 4, 5, 6];
   String sex;
-  String name ;
+  String name;
   String phno;
   String clincAddress;
   String dob;
   String category;
   String address;
+  String dis;
   DateTime joinAt;
   int regID;
-
+  int numImg;
 
   Row addRadioButton(int btnValue, String title) {
     return Row(
@@ -45,10 +49,17 @@ class _DocDataState extends State<DocData> {
           activeColor: Theme.of(context).primaryColor,
           value: gender[btnValue],
           groupValue: sex,
-          onChanged: (value){
+          onChanged: (value) {
             setState(() {
               print(value);
-              sex=value;
+              sex = value;
+              if (sex == "Male") {
+                numImg = 2 + Random().nextInt(4 - 2);
+                print(numImg);
+              } else {
+                numImg = 2 + Random().nextInt(4 - 2);
+                print(numImg);
+              }
             });
           },
         ),
@@ -56,6 +67,7 @@ class _DocDataState extends State<DocData> {
       ],
     );
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -63,21 +75,22 @@ class _DocDataState extends State<DocData> {
     getCurrentUser();
     var rng = new Random();
     regID = rng.nextInt(900000) + 100000;
-    name = "Dr."+name;
+    name = "Dr." + name;
     _controller = new TextEditingController(text: name);
   }
-  void getCurrentUser(){
-    try{
-      final user =  _auth.currentUser;
-      if(user!=null){
+
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
         loggedInUser = user;
-        name =loggedInUser.displayName;
+        name = loggedInUser.displayName;
       }
-    }
-    catch(e){
+    } catch (e) {
       print(e);
     }
   }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -142,12 +155,12 @@ class _DocDataState extends State<DocData> {
                             FilteringTextInputFormatter.digitsOnly,
                           ],
                           validator: (value) {
-                            if (value.isEmpty ) {
+                            if (value.isEmpty) {
                               return 'Please enter text...';
                             }
                             return null;
                           },
-                          onChanged: (value){
+                          onChanged: (value) {
                             phno = value;
                           },
                         ),
@@ -179,7 +192,7 @@ class _DocDataState extends State<DocData> {
                             }
                             return null;
                           },
-                          onChanged: (value){
+                          onChanged: (value) {
                             clincAddress = value;
                           },
                         ),
@@ -218,7 +231,7 @@ class _DocDataState extends State<DocData> {
                             }
                             return null;
                           },
-                          onChanged: (value){
+                          onChanged: (value) {
                             category = value;
                           },
                         ),
@@ -239,8 +252,29 @@ class _DocDataState extends State<DocData> {
                             }
                             return null;
                           },
-                          onChanged: (value){
+                          onChanged: (value) {
                             address = value;
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          maxLines: 3,
+                          decoration: InputDecoration(
+                            labelText: "Discription",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter text...';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            dis = value;
                           },
                         ),
                       ),
@@ -262,18 +296,28 @@ class _DocDataState extends State<DocData> {
                               var joinAt = DateTime.now();
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
-                                _firestore.collection('docInfo').doc(loggedInUser.uid).set({
-                                  'address':address,
-                                  'category':category,
-                                  'clinicAddress':clincAddress,
-                                  'dob':dob,
-                                  'joinAt':joinAt,
-                                  'name':name,
-                                  'phno':int.parse(phno),
-                                  'regID':regID,
-                                  'sex':sex,
+                                _firestore
+                                    .collection('docInfo')
+                                    .doc(loggedInUser.uid)
+                                    .set({
+                                  'address': address,
+                                  'category': category,
+                                  'clinicAddress': clincAddress,
+                                  'dob': dob,
+                                  'joinAt': joinAt,
+                                  'name': name,
+                                  'phno': int.parse(phno),
+                                  'regID': regID,
+                                  'sex': sex,
+                                  'uid': loggedInUser.uid,
+                                  'dis': dis,
+                                  'profilepic':
+                                      "https://firebasestorage.googleapis.com/v0/b/testsahajlc.appspot.com/o/DocImages%2Fdoc$numImg.png?alt=media&token=downloadTokens",
                                 });
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DashBoard()));
                               }
                             },
                           ),
@@ -290,4 +334,3 @@ class _DocDataState extends State<DocData> {
     );
   }
 }
-

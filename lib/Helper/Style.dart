@@ -29,67 +29,127 @@ final LinearGradient splashBGGradient = LinearGradient(
 //
 //  Splash Screen Text style
 //
-final TextStyle appBarHeadStyle =
-TextStyle(color: docGreen, fontSize: 40.0, fontWeight: FontWeight.bold,fontFamily: 'Roboto');
-final TextStyle appDrawerTextStyle =
-TextStyle(color: Colors.black54, fontSize: 24.0, fontWeight: FontWeight.bold,fontFamily: 'Roboto');
-final TextStyle appDrawerSubTextStyle =
-TextStyle(color: Colors.black54, fontSize: 18.0, fontWeight: FontWeight.bold,fontFamily: 'Roboto');
-final TextStyle appBarSubHeadStyle =
-TextStyle(color: headDark, fontSize: 20.0, fontWeight: FontWeight.w100,fontFamily: 'Roboto');
+final TextStyle appBarHeadStyle = TextStyle(
+    color: docGreen,
+    fontSize: 40.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Roboto');
+final TextStyle appDrawerTextStyle = TextStyle(
+    color: Colors.black54,
+    fontSize: 24.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Roboto');
+final TextStyle appDrawerSubTextStyle = TextStyle(
+    color: Colors.black54,
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Roboto');
+final TextStyle appBarSubHeadStyle = TextStyle(
+    color: headDark,
+    fontSize: 20.0,
+    fontWeight: FontWeight.w100,
+    fontFamily: 'Roboto');
 //
 //  Splash Screen Text style
 //
-final TextStyle splashHeadTextStyle =
-    TextStyle(color: docGreen, fontSize: 35.0, fontWeight: FontWeight.bold,fontFamily: 'Montserrat');
+final TextStyle splashHeadTextStyle = TextStyle(
+    color: docGreen,
+    fontSize: 35.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Montserrat');
 
-final TextStyle splashSubHeadTextStyle =
-    TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700, color: white,fontFamily: "Montserrat");
-final TextStyle splashVersionTextStyle =
-    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400, color: white,fontFamily: "Roboto",fontStyle: FontStyle.italic);
-final TextStyle splashDevTextStyle =
-TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700, color: white,fontFamily: "Roboto",fontStyle: FontStyle.italic);
+final TextStyle splashSubHeadTextStyle = TextStyle(
+    fontSize: 24.0,
+    fontWeight: FontWeight.w700,
+    color: white,
+    fontFamily: "Montserrat");
+final TextStyle splashVersionTextStyle = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w400,
+    color: white,
+    fontFamily: "Roboto",
+    fontStyle: FontStyle.italic);
+final TextStyle splashDevTextStyle = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w700,
+    color: white,
+    fontFamily: "Roboto",
+    fontStyle: FontStyle.italic);
 
 //
 // Info-Signup Screen Text style
 //
 
-final TextStyle infoScreenTextStyle =
-TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, color: headDark,fontFamily: "Roboto");
-final TextStyle textStyleSubHeadInfo =
-TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700, color: gray,fontFamily: "Montserrat");
-final TextStyle textStyleButton =
-TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: white,fontFamily: "Roboto");
-final TextStyle textButton =
-TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color:Colors.black,fontFamily: "Roboto");
-final TextStyle textButtonLink =
-TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Color(0xFF2A2AC0),fontFamily: "Roboto");
-final TextStyle infoDevTextStyle =
-TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: docGreen,fontFamily: "Roboto",fontStyle: FontStyle.italic);
-final TextStyle inputFieldTextStyle =
-TextStyle(fontSize: 22.0, fontWeight: FontWeight.w300, color: Colors.black,fontFamily: "Roboto",);
-final TextStyle dialogHead =
-TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.black,fontFamily: "Roboto",);
-final TextStyle dialogSubHead =
-TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.black54,fontFamily: "Roboto",);
+final TextStyle infoScreenTextStyle = TextStyle(
+    fontSize: 26.0,
+    fontWeight: FontWeight.bold,
+    color: headDark,
+    fontFamily: "Roboto");
+final TextStyle textStyleSubHeadInfo = TextStyle(
+    fontSize: 24.0,
+    fontWeight: FontWeight.w700,
+    color: gray,
+    fontFamily: "Montserrat");
+final TextStyle textStyleButton = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w500,
+    color: white,
+    fontFamily: "Roboto");
+final TextStyle textButton = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w300,
+    color: Colors.black,
+    fontFamily: "Roboto");
+final TextStyle textButtonLink = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w300,
+    color: Color(0xFF2A2AC0),
+    fontFamily: "Roboto");
+final TextStyle infoDevTextStyle = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.w500,
+    color: docGreen,
+    fontFamily: "Roboto",
+    fontStyle: FontStyle.italic);
+final TextStyle inputFieldTextStyle = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.w300,
+  color: Colors.black,
+  fontFamily: "Roboto",
+);
+final TextStyle dialogHead = TextStyle(
+  fontSize: 24.0,
+  fontWeight: FontWeight.w600,
+  color: Colors.black,
+  fontFamily: "Roboto",
+);
+final TextStyle dialogSubHead = TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.w600,
+  color: Colors.black54,
+  fontFamily: "Roboto",
+);
 
 //
-// DashBoard
+// HomeScreenCard
 //
+final LinearGradient homeCardGradient = LinearGradient(
+    colors: [Color(0xFF2A2AC0), Color(0xFF4AC4D0)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight);
 
-final TextStyle textStyleR200 =
-TextStyle(fontSize: 16.0, fontWeight: FontWeight.w200, color: Colors.white,fontFamily: "Roboto",);
+final TextStyle cardTextinfo = TextStyle(
+  color: Colors.white,
+  fontSize: 14.0,
+);
 
-final TextStyle textStyleR300 =
-TextStyle(fontSize: 20.0, fontWeight: FontWeight.w300, color: Colors.white,fontFamily: "Roboto",);
+final TextStyle nameTextinfo = TextStyle(
+  color: Colors.white,
+  fontSize: 16.0,
+);
 
-final TextStyle textStyleR500 =
-TextStyle(fontSize: 32.0, fontWeight: FontWeight.w700, color: Colors.white,fontFamily: "Roboto",);
-
-final TextStyle textStyleButtonR500 =
-TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: white,fontFamily: "Roboto");
-
-
-final TextStyle textStyleBlueR700 =
-TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700, color:Color(0xFF181461),fontFamily: "Roboto",);
-
+final TextStyle homeTitle = TextStyle(
+  color: Colors.white,
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+);

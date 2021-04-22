@@ -20,7 +20,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   bool showSpinner = false;
   User user;
 
@@ -39,10 +38,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 50),
                   Flexible(
                     child: Image(
+                      height: MediaQuery.of(context).size.height * 0.25,
+                      width: MediaQuery.of(context).size.width * 0.70,
                       image: AssetImage('images/logoIn.png'),
                     ),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 20),
                   Text(
                     appName,
                     style: splashHeadTextStyle,
@@ -54,30 +55,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 50),
                   CarouselSlider(
-                      items: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: SvgPicture.asset('assets/as1.svg'),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: SvgPicture.asset('assets/as2.svg'),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: SvgPicture.asset('assets/as3.svg'),
-                        ),
-                      ],
-                      options: CarouselOptions(
-                        height: 300,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        scrollDirection: Axis.horizontal, //can be set to Axis.vertical
-                        viewportFraction: 1.0,
-                        initialPage: 0,
-                        aspectRatio: 16/10,
-                        autoPlay: true,
+                    items: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: SvgPicture.asset('assets/as1.svg'),
                       ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: SvgPicture.asset('assets/as2.svg'),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: SvgPicture.asset('assets/as3.svg'),
+                      ),
+                    ],
+                    options: CarouselOptions(
+                      height: MediaQuery.of(context).size.height * 0.30,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      scrollDirection:
+                          Axis.horizontal, //can be set to Axis.vertical
+                      viewportFraction: 1.0,
+                      initialPage: 0,
+                      aspectRatio: 16 / 9,
+                      autoPlay: true,
+                    ),
                   ),
                   SizedBox(height: 20),
                   RoundedButton(
@@ -86,11 +88,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         showSpinner = true;
                       });
                       AuthService().signInWithGoogle().then((user) => {
-                        this.user = user,
-                        db.collection('docInfo').doc(user.uid).get().then((data)=>{
-                          data.exists? Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard())): Navigator.push(context,MaterialPageRoute(builder: (context)=>DocData())),
-                        }),
-                      });
+                            this.user = user,
+                            db
+                                .collection('docInfo')
+                                .doc(user.uid)
+                                .get()
+                                .then((data) => {
+                                      data.exists
+                                          ? Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DashBoard()))
+                                          : Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DocData())),
+                                    }),
+                          });
                       setState(() {
                         showSpinner = false;
                       });
