@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
-import 'package:medic_pulse_doc/modals/docModal.dart';
-import 'package:medic_pulse_doc/providers/docProvider.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

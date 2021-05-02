@@ -8,13 +8,10 @@ class AppointmentScreen extends StatefulWidget {
 class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          "Appointment",
-          style: TextStyle(
-            color: Colors.black,
-          ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          child: Text("hello"),
         ),
       ),
     );

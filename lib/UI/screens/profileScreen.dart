@@ -117,12 +117,12 @@ class _ProfileState extends State<Profile> {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 40.0),
                 decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 10,
-                          color: Colors.blueGrey,
-                          spreadRadius: 3)
-                    ],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       blurRadius: 10,
+                    //       color: Colors.blueGrey,
+                    //       spreadRadius: 3)
+                    // ],
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(60),
