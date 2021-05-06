@@ -156,9 +156,19 @@ class _ChatState extends State<Chat> {
                     child: FlatButton(
                       onPressed: () {
                         messageTextController.clear();
-                        // var now = DateTime.now().microsecondsSinceEpoch;
                         // _firestore.collection('messages').doc(now.toString()).set(
                         //     {'text': messageText, 'sender': loggedInUser.email});
+                        _firestore
+                            .collection('userInfo')
+                            .doc("2cPTzWSKGKSirz97ck1f2OqHE9H2")
+                            .collection('conversation')
+                            .doc(DateTime.now().toString().toString())
+                            .set({
+                          'sender': 'sunil',
+                          'content': messageText,
+                          'timestamp': DateTime.now().millisecondsSinceEpoch,
+                          'type': 0
+                        });
                       },
                       child: Icon(
                         Icons.send,
@@ -191,13 +201,15 @@ class MessageStream extends StatelessWidget {
           List<MessageBubble> messageBubbles = [];
           for (var msg in messages) {
             final messageText = msg.data()['content'];
-            final messageSender = "";
-            final currUser = "mukesh.india9991@gmail.com";
+            final attachment = msg.data()['attachment'];
+            final messageSender = msg.data()['sender'];
+            final curusr = "sunil";
 
             final messageBubble = MessageBubble(
               text: messageText,
               sender: messageSender,
-              isMe: currUser == messageSender,
+              isMe: messageSender == curusr,
+              attach: attachment,
             );
             messageBubbles.add(messageBubble);
           }
@@ -221,9 +233,10 @@ class MessageStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text, this.isMe});
+  MessageBubble({this.sender, this.text, this.isMe, this.attach});
   final String sender;
   final String text;
+  final String attach;
   final bool isMe;
   @override
   Widget build(BuildContext context) {
@@ -233,10 +246,6 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            sender,
-            style: TextStyle(color: Colors.white70, fontSize: 12.0),
-          ),
           Material(
             elevation: 12.0,
             borderRadius: isMe
@@ -248,15 +257,41 @@ class MessageBubble extends StatelessWidget {
                     topLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
                     topRight: Radius.circular(30.0)),
-            color: isMe ? Colors.green.shade900 : Colors.blueGrey,
+            color: isMe ? Colors.green.shade400 : Colors.blueGrey,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 12.0, horizontal: 22.0),
-              child: Text(
-                '$text',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    attach != null
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Container(
+                              height: 300,
+                              width: 300,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                  image: NetworkImage(attach),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
+                    Container(
+                      child: Text(
+                        '$text',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

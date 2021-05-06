@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
+import 'package:medic_pulse_doc/UI/screens/chat.dart';
 
 class AppointmentScreen extends StatefulWidget {
   @override
@@ -162,7 +163,14 @@ class AppointmentTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Chat(
+                                name: name,
+                              )));
+                },
                 child: Text(
                   "Attend Patient",
                   style: TextStyle(

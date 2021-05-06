@@ -1,6 +1,10 @@
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
 import 'package:medic_pulse_doc/UI/screens/appointmentScreen.dart';
+import 'package:medic_pulse_doc/UI/screens/chat.dart';
+import 'package:medic_pulse_doc/routes/navigatorRoutes.dart';
+import 'package:medic_pulse_doc/routes/tabData.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,7 +23,91 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              UpcommingAppointmentCard(),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                color: Colors.white,
+                elevation: 10,
+                child: Container(
+                  padding:
+                      EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    gradient: homeCardGradient,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Upcomming Appointments:",
+                        style: homeTitle,
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        "Time: 11:00",
+                        style: cardTextinfo,
+                      ),
+                      Text(
+                        "Date: 12-04-2021",
+                        style: cardTextinfo,
+                      ),
+                      SizedBox(
+                        height: 12.0,
+                      ),
+                      Text(
+                        "Patient Name: Ritick Saha",
+                        style: nameTextinfo,
+                      ),
+                      SizedBox(
+                        height: 12.0,
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Chat(
+                                          name: "Ritick Saha",
+                                        )));
+                          });
+                        },
+                        child: Text(
+                          "Attend Patient",
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                        ),
+                        color: Colors.lightBlueAccent,
+                        splashColor: Colors.greenAccent,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AppointmentScreen()));
+                            });
+                          },
+                          child: Text(
+                            "View All Appointments ->",
+                            style: TextStyle(
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 30.0,
               ),
@@ -251,83 +339,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class UpcommingAppointmentCard extends StatelessWidget {
-  const UpcommingAppointmentCard({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      color: Colors.white,
-      elevation: 10,
-      child: Container(
-        padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
-          gradient: homeCardGradient,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Upcomming Appointments:",
-              style: homeTitle,
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              "Time: 11:00",
-              style: cardTextinfo,
-            ),
-            Text(
-              "Date: 12-04-2021",
-              style: cardTextinfo,
-            ),
-            SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              "Patient Name: Ritick Saha",
-              style: nameTextinfo,
-            ),
-            SizedBox(
-              height: 12.0,
-            ),
-            FlatButton(
-              onPressed: () {},
-              child: Text(
-                "Attend Patient",
-                style: TextStyle(
-                  color: Colors.white70,
-                ),
-              ),
-              color: Colors.lightBlueAccent,
-              splashColor: Colors.greenAccent,
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  "View All Appointments ->",
-                  style: TextStyle(
-                    color: Colors.white70,
-                  ),
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );
