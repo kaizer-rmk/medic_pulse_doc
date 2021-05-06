@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
+import 'package:medic_pulse_doc/UI/screens/chat.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -119,6 +120,14 @@ class ChatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Chat(
+                      name: title,
+                    )));
+      },
       child: Card(
         elevation: 1,
         child: Container(

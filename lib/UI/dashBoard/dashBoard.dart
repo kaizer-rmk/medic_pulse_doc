@@ -44,9 +44,6 @@ class _DashBoardState extends State<DashBoard> {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        // dpUrl = loggedInUser.photoURL;
-        // mail = loggedInUser.email;
-        // name = loggedInUser.displayName;
       }
     } catch (e) {
       print(e);

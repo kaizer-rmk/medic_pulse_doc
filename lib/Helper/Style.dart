@@ -153,3 +153,42 @@ final TextStyle homeTitle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,
 );
+// appointment Screen
+final TextStyle expantionHead = TextStyle(
+  fontFamily: "Montserrat",
+  fontWeight: FontWeight.w700,
+  color: Colors.black54,
+);
+final TextStyle expantionText = TextStyle(
+  fontSize: 16.9,
+  fontFamily: "Roboto",
+  fontWeight: FontWeight.w300,
+);
+final kSendButtonTextStyle = TextStyle(
+  color: Colors.lightBlueAccent,
+  fontWeight: FontWeight.bold,
+  fontSize: 18.0,
+);
+
+final kMessageTextFieldDecoration = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  hintText: 'Type your message here...',
+  fillColor: Colors.white,
+  filled: true,
+  border: InputBorder.none,
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(50),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(50),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(50),
+  ),
+);
+
+final kMessageContainerDecoration = BoxDecoration(
+  border: Border(
+    top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+  ),
+);
