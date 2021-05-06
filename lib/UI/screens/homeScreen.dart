@@ -1,10 +1,11 @@
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
 import 'package:medic_pulse_doc/UI/screens/appointmentScreen.dart';
 import 'package:medic_pulse_doc/UI/screens/chat.dart';
-import 'package:medic_pulse_doc/routes/navigatorRoutes.dart';
-import 'package:medic_pulse_doc/routes/tabData.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+
+const url = 'https://www.covid19india.org/';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,6 +13,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  _launchURL() async {
+    if (await canLaunch(url)) {
+      await launch(url,
+          forceSafariVC: true, forceWebView: true, enableJavaScript: true);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -218,11 +228,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     Container(
-                      child: Text(
-                        "See details",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
+                      child: TextButton(
+                        onPressed: _launchURL,
+                        child: Text(
+                          "See details",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),

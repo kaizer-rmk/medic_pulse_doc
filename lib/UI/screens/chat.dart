@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
 
+String patientUID = "oTO2zQN5oWUtYqjl0CnzyGioXfM2";
+
 class Chat extends StatefulWidget {
   final name;
   Chat({this.name});
@@ -29,7 +31,6 @@ class _ChatState extends State<Chat> {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -160,13 +161,14 @@ class _ChatState extends State<Chat> {
                         //     {'text': messageText, 'sender': loggedInUser.email});
                         _firestore
                             .collection('userInfo')
-                            .doc("2cPTzWSKGKSirz97ck1f2OqHE9H2")
+                            .doc(patientUID)
                             .collection('conversation')
-                            .doc(DateTime.now().toString().toString())
-                            .set({
-                          'sender': 'sunil',
+                            .doc(loggedInUser.uid)
+                            .collection('chat')
+                            .add({
                           'content': messageText,
-                          'timestamp': DateTime.now().millisecondsSinceEpoch,
+                          'sender': loggedInUser.uid,
+                          'timestamp': Timestamp.now(),
                           'type': 0
                         });
                       },
@@ -192,18 +194,20 @@ class MessageStream extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
           .collection('userInfo')
-          .doc("2cPTzWSKGKSirz97ck1f2OqHE9H2")
+          .doc(patientUID)
           .collection('conversation')
+          .doc(loggedInUser.uid)
+          .collection('chat')
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final messages = snapshot.data.docs.reversed;
+          final messages = snapshot.data.docs;
           List<MessageBubble> messageBubbles = [];
           for (var msg in messages) {
             final messageText = msg.data()['content'];
             final attachment = msg.data()['attachment'];
             final messageSender = msg.data()['sender'];
-            final curusr = "sunil";
+            final curusr = loggedInUser.uid;
 
             final messageBubble = MessageBubble(
               text: messageText,
