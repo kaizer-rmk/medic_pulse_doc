@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:medic_pulse_doc/Helper/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:full_screen_image/full_screen_image.dart';
+import 'package:file_utils/file_utils.dart';
+import 'package:android_path_provider/android_path_provider.dart';
+import 'dart:io' show Platform;
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
@@ -198,15 +203,18 @@ class MessageStream extends StatelessWidget {
           .collection('conversation')
           .doc(loggedInUser.uid)
           .collection('chat')
+          .orderBy('timestamp')
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final messages = snapshot.data.docs;
+          final messages = snapshot.data.docs.reversed;
           List<MessageBubble> messageBubbles = [];
           for (var msg in messages) {
             final messageText = msg.data()['content'];
             final attachment = msg.data()['attachment'];
             final messageSender = msg.data()['sender'];
+            final type = msg.data()['type'];
+            final filename = msg.data()['fileName'];
             final curusr = loggedInUser.uid;
 
             final messageBubble = MessageBubble(
@@ -214,6 +222,8 @@ class MessageStream extends StatelessWidget {
               sender: messageSender,
               isMe: messageSender == curusr,
               attach: attachment,
+              type: type,
+              filename: filename,
             );
             messageBubbles.add(messageBubble);
           }
@@ -237,11 +247,57 @@ class MessageStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text, this.isMe, this.attach});
+  MessageBubble(
+      {this.sender,
+      this.text,
+      this.isMe,
+      this.attach,
+      this.type,
+      this.filename});
   final String sender;
   final String text;
   final String attach;
   final bool isMe;
+  final int type;
+  final String filename;
+  String dir;
+  String progressstr;
+
+  downloadFile(String url, String fileName) {
+    createFileFromPdfUrl(url, fileName);
+  }
+
+  Future<void> createFileFromPdfUrl(dynamic url, fileName) async {
+    Dio dio = Dio();
+    bool checkPermission1 = true;
+    if (checkPermission1 == true) {
+      if (Platform.isAndroid) {
+        dir = await AndroidPathProvider.documentsPath + '/sahaj/report';
+      }
+      try {
+        FileUtils.mkdir([dir]);
+        await dio.download(url, "$dir/$fileName", deleteOnError: true,
+            onReceiveProgress: (rec, total) {
+          progressstr =
+              ((rec / total) * 100).toStringAsFixed(0) + "% Downloaded";
+          print(progressstr);
+        });
+      } catch (e) {}
+    }
+  }
+
+  Widget fullScreenHeroWidget() => FullScreenWidget(
+        child: Hero(
+          tag: "customTag",
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.network(
+              attach,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+      );
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -271,20 +327,53 @@ class MessageBubble extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     attach != null
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              height: 300,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                  image: NetworkImage(attach),
-                                  fit: BoxFit.fill,
+                        ? type == 1
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                  onTap: () {
+                                    fullScreenHeroWidget();
+                                  },
+                                  child: Container(
+                                    height: 300,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      // image: DecorationImage(
+                                      //   image: NetworkImage(attach),
+                                      //   fit: BoxFit.fill,
+                                      // ),
+                                    ),
+                                    child: fullScreenHeroWidget(),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          )
+                              )
+                            : type == 2
+                                ? Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.picture_as_pdf,
+                                          size: 40,
+                                          color: Colors.orange,
+                                        ),
+                                        Text("PDF:  " + filename),
+                                        InkWell(
+                                          child: Icon(
+                                            Icons.file_download,
+                                            color: Colors.grey,
+                                          ),
+                                          onTap: () {
+                                            downloadFile(attach, filename);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container()
                         : Container(),
                     Container(
                       child: Text(
